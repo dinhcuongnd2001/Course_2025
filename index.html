@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    
+    <h1>The input pattern attribute</h1>
+
+    <div>
+      <label for="password">Password:</label>
+
+      <input 
+        type="text" 
+        id="password" 
+        name="password" 
+        title="Minimum eight characters, at least one letter and one number">
+
+        <p id="check_password" style="display: none;"></p>
+
+      <br><br>
+      <input id="submit" type="submit">
+    </div>
+    
+    <p><strong>Note:</strong> The pattern attribute of the input tag is not supported in Safari 10 (or earlier).</p>
+
+    <script>
+      // Lấy các phần tử
+      const inputSubmit = document.getElementById('submit');
+      const inputPassword = document.getElementById('password');
+      const check_password = document.getElementById('check_password');
+
+      inputSubmit.addEventListener('click', function() {
+        const passwordValue = inputPassword.value;
+        // console.log(passwordValue);
+        const pattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+
+        if(pattern.test(passwordValue)){
+          alert('Valid password!');
+        } else {
+          alert('Invalid password!');
+          inputPassword.style.backgroundColor = 'red' ;
+          check_password.style.display = 'block';
+          check_password.innerHTML = 'Password must be at least 8 characters long, contain at least one letter and one number.';
+        }
+      });
+    </script>
+  </body>
+</html>
