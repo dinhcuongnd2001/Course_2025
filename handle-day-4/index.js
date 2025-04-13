@@ -9,8 +9,23 @@
 // console.log(b)
 
 // bai2
-const a = ["Alice", "Bob", "Charlie"]
+// const a = ["Alice", "Bob", "Charlie"]
 
-const b = a.map((value) => "Hi, " + value)
+// const b = a.map((value) => "Hi, " + value)
 
-console.log(b)
+// console.log(b)
+
+// bai4
+// const a = [{ ten: "Alice", tuoi: 15 }, { ten: "Bob", tuoi: 16 }]
+
+// const b = a.map((value) => {
+//     // const c = {
+//     //     ten : value.ten,
+//     //     tuoi : value.tuoi +1
+//     // }
+//     // return c
+//     value.tuoi+=1
+//     return value
+// });
+
+// console.log(a)
