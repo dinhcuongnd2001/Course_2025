@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập JavaScript: map và reduce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #e74c3c;
+        }
+        .exercise {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .exercise p {
+            margin: 5px 0;
+        }
+        .exercise strong {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .guide {
+            display: block;
+        }
+        .guide.hidden {
+            display: none;
+        }
+        .solution {
+            display: none;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #2980b9;
+            margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .solution.visible {
+            display: block;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px 5px 5px 0;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button.solution-btn {
+            background-color: #e74c3c;
+        }
+        button.solution-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bài tập JavaScript: map và reduce</h1>
+
+    <h2>Phần 1: Bài tập về map</h2>
+
+    <div class="exercise">
+        <h3>Bài 1: Nhân đôi số</h3>
+        <p><strong>Yêu cầu:</strong> Cho một mảng số <code>[1, 2, 3, 4, 5]</code>, hãy tạo một mảng mới với mỗi số được nhân đôi.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>[2, 4, 6, 8, 10]</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Sử dụng <code>map</code> để nhân mỗi phần tử với 2. Hãy thử viết với cả hàm thông thường và arrow function.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const so = [1, 2, 3, 4, 5];
+const ketQua = so.map(x => x * 2);
+console.log(ketQua); // [2, 4, 6, 8, 10]
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 2: Thêm tiền tố vào tên</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng tên <code>["Alice", "Bob", "Charlie"]</code>, tạo mảng mới với mỗi tên được thêm tiền tố "Hi, ".</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>["Hi, Alice", "Hi, Bob", "Hi, Charlie"]</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>map</code> để nối chuỗi "Hi, " vào trước mỗi tên. Thử dùng template literals (<code>${}</code>) để viết gọn.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const ten = ["Alice", "Bob", "Charlie"];
+const loiChao = ten.map(ten => \`Hi, \${ten}\`);
+console.log(loiChao); // ["Hi, Alice", "Hi, Bob", "Hi, Charlie"]
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 3: Chuyển đổi đơn vị</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng khoảng cách tính bằng mét <code>[1000, 2500, 500]</code>, tạo mảng mới chứa khoảng cách tính bằng kilômét.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>[1, 2.5, 0.5]</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Chia mỗi phần tử cho 1000 trong hàm callback của <code>map</code>.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const met = [1000, 2500, 500];
+const km = met.map(x => x / 1000);
+console.log(km); // [1, 2.5, 0.5]
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 4: Tăng tuổi học sinh</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng các object học sinh <code>[{ ten: "Alice", tuoi: 15 }, { ten: "Bob", tuoi: 16 }]</code>, tạo mảng mới với mỗi học sinh được tăng tuổi lên 1.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>[{ ten: "Alice", tuoi: 16 }, { ten: "Bob", tuoi: 17 }]</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Trong <code>map</code>, trả về một object mới với thuộc tính <code>tuoi</code> tăng thêm 1, giữ nguyên <code>ten</code>. Dùng spread operator (<code>...</code>) để sao chép object.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const hocSinh = [{ ten: "Alice", tuoi: 15 }, { ten: "Bob", tuoi: 16 }];
+const tuoiMoi = hocSinh.map(hs => ({ ...hs, tuoi: hs.tuoi + 1 }));
+console.log(tuoiMoi); // [{ ten: "Alice", tuoi: 16 }, { ten: "Bob", tuoi: 17 }]
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 5: Định dạng số thứ tự</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng <code>["Apple", "Banana", "Orange"]</code>, tạo mảng mới với mỗi phần tử được định dạng thành "Item 1: Apple", "Item 2: Banana", v.v.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>["Item 1: Apple", "Item 2: Banana", "Item 3: Orange"]</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Sử dụng tham số <code>index</code> trong hàm callback của <code>map</code> để thêm số thứ tự (lưu ý <code>index</code> bắt đầu từ 0, nên cộng thêm 1).</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const monAn = ["Apple", "Banana", "Orange"];
+const danhSach = monAn.map((mon, index) => \`Item \${index + 1}: \${mon}\`);
+console.log(danhSach); // ["Item 1: Apple", "Item 2: Banana", "Item 3: Orange"]
+        </code></pre>
+    </div>
+
+    <h2>Phần 2: Bài tập về reduce</h2>
+
+    <div class="exercise">
+        <h3>Bài 6: Tính tổng các số</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng số <code>[1, 2, 3, 4, 5]</code>, tính tổng tất cả các số.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>15</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>reduce</code> với giá trị khởi tạo là <code>0</code>, cộng từng phần tử vào tổng.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const so = [1, 2, 3, 4, 5];
+const tong = so.reduce((sum, x) => sum + x, 0);
+console.log(tong); // 15
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 7: Tìm số lớn nhất</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng số <code>[10, 5, 8, 12, 3]</code>, tìm số lớn nhất.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>12</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>reduce</code> để so sánh từng phần tử với giá trị tích lũy, giữ lại số lớn hơn.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const so = [10, 5, 8, 12, 3];
+const max = so.reduce((max, x) => (x > max ? x : max), so[0]);
+console.log(max); // 12
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 8: Đếm số lần xuất hiện</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng <code>["apple", "banana", "apple", "orange", "banana"]</code>, tạo một object đếm số lần xuất hiện của mỗi phần tử.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>{ apple: 2, banana: 2, orange: 1 }</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>reduce</code> với giá trị khởi tạo là một object rỗng <code>{}</code>. Với mỗi phần tử, tăng giá trị đếm trong object.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const mang = ["apple", "banana", "apple", "orange", "banana"];
+const dem = mang.reduce((obj, x) => {
+    obj[x] = (obj[x] || 0) + 1;
+    return obj;
+}, {});
+console.log(dem); // { apple: 2, banana: 2, orange: 1 }
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 9: Ghép chuỗi</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng <code>["Hello", "world", "from", "JS"]</code>, ghép tất cả chuỗi thành một chuỗi duy nhất, cách nhau bằng dấu cách.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>"Hello world from JS"</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>reduce</code> với giá trị khởi tạo là chuỗi rỗng <code>""</code>, nối từng chuỗi với dấu cách.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const mang = ["Hello", "world", "from", "JS"];
+const chuoi = mang.reduce((str, x) => str + (str ? " " : "") + x, "");
+console.log(chuoi); // "Hello world from JS"
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 10: Tính tổng điểm học sinh</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng object học sinh <code>[{ ten: "Alice", diem: 80 }, { ten: "Bob", diem: 85 }]</code>, tính tổng điểm của tất cả học sinh.</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>165</code></p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>reduce</code> để cộng thuộc tính <code>diem</code> của mỗi object, bắt đầu từ <code>0</code>.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const hocSinh = [{ ten: "Alice", diem: 80 }, { ten: "Bob", diem: 85 }];
+const tongDiem = hocSinh.reduce((sum, hs) => sum + hs.diem, 0);
+console.log(tongDiem); // 165
+        </code></pre>
+    </div>
+
+    <h2>Phần 3: Bài tập kết hợp map và reduce</h2>
+
+    <div class="exercise">
+        <h3>Bài 11: Tính tổng bình phương</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng số <code>[1, 2, 3, 4]</code>, tính tổng các bình phương của các số (tức là 1² + 2² + 3² + 4²).</p>
+        <p><strong>Kết quả mong đợi:</strong> <code>30</code> (1 + 4 + 9 + 16 = 30)</p>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>map</code> để tạo mảng chứa bình phương của các số, sau đó dùng <code>reduce</code> để tính tổng.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const so = [1, 2, 3, 4];
+const binhPhuong = so.map(x => x * x);
+const tong = binhPhuong.reduce((sum, x) => sum + x, 0);
+console.log(tong); // 30
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 12: Tạo danh sách tên viết hoa và đếm độ dài</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng tên <code>["alice", "bob", "charlie"]</code>, tạo mảng mới chứa các tên viết hoa, sau đó tính tổng độ dài của các tên.</p>
+        <p><strong>Kết quả mong đợi:</strong></p>
+        <ul>
+            <li>Mảng tên viết hoa: <code>["ALICE", "BOB", "CHARLIE"]</code></li>
+            <li>Tổng độ dài: <code>12</code> (5 + 3 + 4)</li>
+        </ul>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>map</code> để chuyển tên thành chữ hoa, sau đó dùng <code>reduce</code> trên mảng kết quả để tính tổng độ dài (<code>length</code> của chuỗi).</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const ten = ["alice", "bob", "charlie"];
+const tenHoa = ten.map(t => t.toUpperCase());
+const tongDoDai = tenHoa.reduce((sum, t) => sum + t.length, 0);
+console.log(tenHoa); // ["ALICE", "BOB", "CHARLIE"]
+console.log(tongDoDai); // 12
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 13: Lọc và tính trung bình điểm</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng object học sinh <code>[{ ten: "Alice", diem: 90 }, { ten: "Bob", diem: 75 }, { ten: "Charlie", diem: 85 }]</code>, tạo mảng mới chỉ chứa điểm của học sinh, sau đó tính trung bình điểm.</p>
+        <p><strong>Kết quả mong đợi:</strong></p>
+        <ul>
+            <li>Mảng điểm: <code>[90, 75, 85]</code></li>
+            <li>Trung bình: <code>83.33</code></li>
+        </ul>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>map</code> để lấy mảng chứa <code>diem</code>, sau đó dùng <code>reduce</code> để tính tổng và chia cho độ dài mảng.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const hocSinh = [{ ten: "Alice", diem: 90 }, { ten: "Bob", diem: 75 }, { ten: "Charlie", diem: 85 }];
+const diem = hocSinh.map(hs => hs.diem);
+const trungBinh = diem.reduce((sum, x) => sum + x, 0) / diem.length;
+console.log(diem); // [90, 75, 85]
+console.log(trungBinh); // 83.33
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 14: Chuyển đổi và ghép chuỗi</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng số <code>[1, 2, 3]</code>, tạo mảng mới chứa các chuỗi dạng "Số X", sau đó ghép thành một chuỗi duy nhất cách nhau bằng dấu phẩy.</p>
+        <p><strong>Kết quả mong đợi:</strong></p>
+        <ul>
+            <li>Mảng chuỗi: <code>["Số 1", "Số 2", "Số 3"]</code></li>
+            <li>Chuỗi ghép: <code>"Số 1, Số 2, Số 3"</code></li>
+        </ul>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>map</code> để tạo mảng chuỗi, sau đó dùng <code>reduce</code> hoặc <code>join</code> để ghép chuỗi.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const so = [1, 2, 3];
+const chuoiMang = so.map(x => \`Số \${x}\`);
+const chuoiGhep = chuoiMang.reduce((str, x, i) => str + (i > 0 ? ", " : "") + x, "");
+console.log(chuoiMang); // ["Số 1", "Số 2", "Số 3"]
+console.log(chuoiGhep); // "Số 1, Số 2, Số 3"
+        </code></pre>
+    </div>
+
+    <div class="exercise">
+        <h3>Bài 15: Tính tổng tiền sau chiết khấu</h3>
+        <p><strong>Yêu cầu:</strong> Cho mảng sản phẩm <code>[{ ten: "Pen", gia: 1000 }, { ten: "Book", gia: 5000 }]</code>, tạo mảng mới với giá sau khi giảm 10%, sau đó tính tổng giá.</p>
+        <p><strong>Kết quả mong đợi:</strong></p>
+        <ul>
+            <li>Mảng giá mới: <code>[900, 4500]</code></li>
+            <li>Tổng giá: <code>5400</code></li>
+        </ul>
+        <p class="guide hidden"><strong>Hướng dẫn:</strong> Dùng <code>map</code> để tạo mảng giá sau chiết khấu (giá * 0.9), sau đó dùng <code>reduce</code> để tính tổng.</p>
+        <button class="guide-btn">Hiện hướng dẫn</button>
+        <button class="solution-btn">Xem lời giải</button>
+        <pre class="solution"><code>
+const sanPham = [{ ten: "Pen", gia: 1000 }, { ten: "Book", gia: 5000 }];
+const giaGiam = sanPham.map(sp => sp.gia * 0.9);
+const tongGia = giaGiam.reduce((sum, x) => sum + x, 0);
+console.log(giaGiam); // [900, 4500]
+console.log(tongGia); // 5400
+        </code></pre>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
