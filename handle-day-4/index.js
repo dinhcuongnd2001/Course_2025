@@ -8,3 +8,9 @@
 // console.log(a)
 // console.log(b)
 
+// bai2
+const a = ["Alice", "Bob", "Charlie"]
+
+const b = a.map((value) => "Hi, " + value)
+
+console.log(b)
