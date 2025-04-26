@@ -122,3 +122,16 @@
 // console.log(a)
 // console.log(b)
 // console.log(c)
+
+
+
+// fetch("https://dncuong.id.vn/api/users")
+// .then((response)=>{return response.json()})
+// .then((data)=>{console.log(data)})
+
+// console.log(axios())
+
+// axios.get("https://dncuong.id.vn/api/users")
+// .then(({data})=>{
+//     console.log(data)
+// })
